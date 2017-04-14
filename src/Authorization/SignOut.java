@@ -24,6 +24,7 @@ public class SignOut extends Initialization{
      * @param auth_token your authorization token in EasyQA
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return string message about success sign out or error
      */
 
     public String signOut(String token, String auth_token)  throws IOException, JSONException {

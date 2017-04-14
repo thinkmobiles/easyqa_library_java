@@ -52,8 +52,6 @@ public class UpdateTestRunResults extends Initialization {
      */
     public JSONObject getTestRunResult(String token, String auth_token, String test_run_result_id) throws IOException, JSONException {
 
-
-        String name;
         Call<ResponseBody> call= easyqaUserAPI.getTestRunResult(test_run_result_id, auth_token, token);
 
         Response<ResponseBody> bodyResponse = call.execute();
@@ -79,6 +77,7 @@ public class UpdateTestRunResults extends Initialization {
      * @param result_status Status of test run results, might be in "pass", "block", "untested" and "fail"
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with ids and statuses of test run result (of test case which are added to the test run)
      */
     public Map<String, String>  update(String token, String auth_token, String test_run_result_id, String result_status) throws IOException, JSONException {
 

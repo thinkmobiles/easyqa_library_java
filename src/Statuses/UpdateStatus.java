@@ -77,6 +77,7 @@ public class UpdateStatus extends Initialization{
      * @param id the status ID
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with ids and names of status
      */
     public Map<String, String> update(String auth_token, String token, String name, String id) throws IOException, JSONException {
 

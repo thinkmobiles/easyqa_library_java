@@ -34,6 +34,7 @@ public class IssueAttachments extends Initialization {
      * @param files a list of files for attachments
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return Integer value of attachment id
      */
     public Integer createAttachment(String token, String auth_token, String id, ArrayList<File> files) throws IOException, JSONException {
 
@@ -74,6 +75,7 @@ public class IssueAttachments extends Initialization {
      * @param files a list of files for attachments
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return Integer value of attachment id
      */
     public Integer createAttachmentByIdInProject(String token, String auth_token, String id, ArrayList<File> files) throws IOException, JSONException {
 

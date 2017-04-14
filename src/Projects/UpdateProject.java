@@ -74,6 +74,7 @@ public class UpdateProject extends Initialization{
      * @param id the id of your project
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map of Integer ids and String titles of the projects
      */
     public Map<String, String> update(String auth_token, String title, String id) throws IOException, JSONException {
 

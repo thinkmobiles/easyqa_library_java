@@ -81,6 +81,7 @@ public class UpdateOrganization extends Initialization{
      * @param data additional parameters for an organization
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of the organization
      */
 
     public Map<String, String> update(String auth_token, String title, String id, String... data) throws IOException, JSONException {

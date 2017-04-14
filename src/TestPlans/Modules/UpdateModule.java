@@ -82,6 +82,7 @@ public class UpdateModule extends Initialization {
      * @param data additional parameters for a module, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test plan module
      */
 
     public  Map<String, String>  update(String token, String auth_token, String module_id, String title, String... data) throws IOException, JSONException {

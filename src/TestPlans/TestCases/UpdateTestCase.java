@@ -100,6 +100,7 @@ public class UpdateTestCase extends Initialization{
      * @param data additional parameters for the test case
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with ids and titles of test case
      */
     public Map<String, String> update(String token, String auth_token, String testcase_id, String... data) throws IOException, JSONException {
 

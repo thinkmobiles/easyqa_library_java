@@ -84,6 +84,7 @@ public class UpdateTestRun extends Initialization{
      * @param data additional parameters for a test run, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with ids and titles of test run
      */
 
     public Map<String, String> updateIncludeAllTestCases(String token, String auth_token, String test_run_id, Integer test_plan_id,
@@ -128,6 +129,7 @@ public class UpdateTestRun extends Initialization{
      * @param data additional parameters for a test run, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with ids and titles of test run
      */
 
     public Map<String, String> updateSelectTestCases(String token, String auth_token, String test_run_id,

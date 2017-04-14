@@ -206,6 +206,7 @@ public class EasyQA {
      * @param project_id the id of your project
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of project
      */
     public Map<String, String> updateProject(String title, String project_id) throws IOException, JSONException {
         return new UpdateProject(url).update(auth_token, title, project_id);
@@ -264,6 +265,7 @@ public class EasyQA {
      * @param status_id the status ID
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and name of status
      */
     public Map<String, String> updateStatus(String token, String status_id, String name) throws IOException, JSONException {
         return new UpdateStatus(url).update(auth_token, token, name, status_id);
@@ -327,6 +329,7 @@ public class EasyQA {
      * @param data additional parameters for a module, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test plan
      */
     public Map<String, String> updateTestPlan(String token, String test_plan_id, String title, String... data) throws IOException, JSONException {
         return new UpdateTestPlan(url).update(token, auth_token, test_plan_id, title, data);
@@ -405,6 +408,7 @@ public class EasyQA {
      * @param data additional parameters for the test case
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test case
      */
     public Map<String, String> updateTestCase(String token, String test_case_id, String... data) throws IOException, JSONException {
         return new UpdateTestCase(url).update(token, auth_token, test_case_id, data);
@@ -470,6 +474,7 @@ public class EasyQA {
      * @param data additional parameters for a module, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of module
      */
     public  Map<String, String> updateModule(String token, String module_id, String title, String... data) throws IOException, JSONException {
         return new UpdateModule(url).update(token, auth_token, module_id, title, data);
@@ -556,6 +561,7 @@ public class EasyQA {
      * @param data additional parameters for a test run, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test run
      */
     public Map<String, String> updateTestRunIncludeAllTestCases(String token, String test_run_id, Integer test_plan_id, String... data) throws IOException, JSONException {
         return new UpdateTestRun(url).updateIncludeAllTestCases(token, auth_token, test_run_id, test_plan_id, data);
@@ -569,6 +575,7 @@ public class EasyQA {
      * @param data additional parameters for a test run, can be description
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test run
      */
     public Map<String, String> updateTestRunSelectTestCases(String token, String test_run_id, Integer test_case_ids[], String... data) throws IOException, JSONException {
         return new UpdateTestRun(url).updateSelectTestCases(token, auth_token, test_run_id, test_case_ids, data);
@@ -632,6 +639,7 @@ public class EasyQA {
      * @param test_run_result_id an id of your test run result (for test case which is added to the test run)
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test case
      */
     public Map<String, String>  updatePassStatusForTestCase(String token, String test_run_result_id) throws IOException, JSONException {
         return new UpdateTestRunResults(url).update(token, auth_token, test_run_result_id, "pass");
@@ -643,6 +651,7 @@ public class EasyQA {
      * @param test_run_result_id an id of your test run result (for test case which is added to the test run)
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test case
      */
     public Map<String, String>  updateFailStatusForTestCase(String token, String test_run_result_id) throws IOException, JSONException {
         return new UpdateTestRunResults(url).update(token, auth_token, test_run_result_id, "fail");
@@ -654,6 +663,7 @@ public class EasyQA {
      * @param test_run_result_id an id of your test run result (for test case which is added to the test run)
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test case
      */
     public Map<String, String>  updateBlockStatusForTestCase(String token, String test_run_result_id) throws IOException, JSONException {
         return new UpdateTestRunResults(url).update(token, auth_token, test_run_result_id, "block");
@@ -665,6 +675,7 @@ public class EasyQA {
      * @param test_run_result_id an id of your test run result (for test case which is added to the test run)
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with id and title of test case
      */
     public Map<String, String>  updateUntestStatusForTestCase(String token, String test_run_result_id) throws IOException, JSONException {
         return new UpdateTestRunResults(url).update(token, auth_token, test_run_result_id, "untested");
@@ -954,6 +965,7 @@ public class EasyQA {
      * @param files a list of files for attachments
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return integer value of attachment id
      */
     public Integer addAttachmentToIssueByUniqueID(String token, String id, ArrayList<File> files) throws IOException, JSONException {
 
@@ -967,6 +979,7 @@ public class EasyQA {
      * @param files a list of files for attachments
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return integer value of attachment id
      */
     public Integer addAttachmentToIssueByProjectID(String token, String id, ArrayList<File> files) throws IOException, JSONException {
 
@@ -1045,6 +1058,7 @@ public class EasyQA {
      * @param data additional parameters for an issue
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return map with string values of id and summary of issue
      */
     public Map<String, String> updateIssueByUniqueID(String token, String id, String... data) throws IOException, JSONException {
 
