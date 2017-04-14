@@ -1,8 +1,6 @@
 package Main;
 
-import Authorization.MemebersList;
-import Authorization.SignIn;
-import Authorization.SignOut;
+import Authorization.*;
 import Crashes.UploadCrash;
 import Issues.*;
 import Organizations.CreateOrganization;
@@ -63,6 +61,52 @@ public class EasyQA {
     public EasyQA(String _url){
         this.url = _url;
 
+    }
+
+    /**
+     * Method for getting the user by id
+     * @param id an id of the user
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return Map with name and email of the user
+     */
+
+    public Map<String, String> getUserByID(String id) throws IOException, JSONException {
+        return new GetUser(url).getUserByID(id);
+    }
+
+    /**
+     * Method for getting the user by email
+     * @param email an email of the user
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return Map with name and id of the user
+     */
+
+    public Map<String, String> getUserByEmail(String email) throws IOException, JSONException {
+        return new GetUser(url).getUserByEmail(email);
+    }
+
+    /**
+     * Method for getting the list of members of your organization in EasyQA by organization id
+     * @param organization_id an id of your organization
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return Map with names and emails of organization members
+     */
+    public Map<String, String> getOrgMembersByOrgId(String organization_id) throws IOException, JSONException {
+        return new OrganizationMembersList(url).getOrgMembersListByOrgId(organization_id, auth_token);
+    }
+
+    /**
+     * Method for getting the list of members of your organization in EasyQA by organization title
+     * @param organization_title a title of your organization
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return Map with names and emails of organization members
+     */
+    public Map<String, String> getOrgMembersByOrgTitle(String organization_title) throws IOException, JSONException {
+        return new OrganizationMembersList(url).getOrgMembersListByOrgTitle(organization_title, auth_token);
     }
 
     /**
@@ -696,25 +740,51 @@ public class EasyQA {
 
 
     /**
-     * Method for adding a new user to your organization assign him with role Admin
+     * Method for adding a new user by user id to your organization assign him with role Admin
      * @param user_id an id of the user to which you want to assign the role (add to organization)
      * @param organization_id the id of your organization
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneAdmin(Integer user_id, String organization_id) throws IOException, JSONException {
-        new OrganizationRole(url).assign(auth_token, user_id, organization_id, "admin" );
+    public JSONObject assigneAdminByUserID(Integer user_id, String organization_id) throws IOException, JSONException {
+        return new OrganizationRole(url).assignByUserID(auth_token, user_id, organization_id, "admin" );
     }
 
     /**
-     * Method for adding a new user to your organization assign him with role User
+     * Method for adding a new user by user id to your organization assign him with role User
      * @param user_id an id of the user to which you want to assign the role (add to organization)
      * @param organization_id the id of your organization
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneUser(Integer user_id, String organization_id) throws IOException, JSONException {
-        new OrganizationRole(url).assign(auth_token, user_id, organization_id, "user" );
+    public JSONObject assigneUserByUserID(Integer user_id, String organization_id) throws IOException, JSONException {
+        return new OrganizationRole(url).assignByUserID(auth_token, user_id, organization_id, "user" );
+    }
+
+    /**
+     * Method for adding a new user by user email to your organization assign him with role Admin
+     * @param email an email of the user to which you want to assign the role (add to organization)
+     * @param organization_id the id of your organization
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneAdminByUserEmail(String email, String organization_id) throws IOException, JSONException {
+        return new OrganizationRole(url).assignByUserEmail(auth_token, email, organization_id, "admin" );
+    }
+
+    /**
+     * Method for adding a new user by user email to your organization assign him with role User
+     * @param email an email of the user to which you want to assign the role (add to organization)
+     * @param organization_id the id of your organization
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneUserByUserEmail(String email, String organization_id) throws IOException, JSONException {
+        return new OrganizationRole(url).assignByUserEmail(auth_token, email, organization_id, "user" );
     }
 
     /**
@@ -730,51 +800,108 @@ public class EasyQA {
 
 
     /**
-     * Method for adding user to your project (assign him role Tester)
+     * Method for adding user to your project (assign him role Tester) by user id
      * @param user_id an id of the user to which you want to assign the role (add to project)
      * @param organization_id an id of your organization
      * @param token token of your project in EasyQA. You can generate it on Integrations page
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneTester(Integer user_id, String organization_id, String token) throws IOException, JSONException {
-        new ProjectRole(url).assign(auth_token, user_id, organization_id, token, "tester");
+    public JSONObject assigneTesterByUserID(Integer user_id, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserID(auth_token, user_id, organization_id, token, "tester");
     }
 
     /**
-     * Method for adding user to your project (assign him role Developer)
+     * Method for adding user to your project (assign him role Developer) by user id
      * @param user_id an id of the user to which you want to assign the role (add to project)
      * @param organization_id an id of your organization
      * @param token token of your project in EasyQA. You can generate it on Integrations page
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneDeveloper(Integer user_id, String organization_id, String token) throws IOException, JSONException {
-        new ProjectRole(url).assign(auth_token, user_id, organization_id, token, "developer");
+    public JSONObject assigneDeveloperByUserID(Integer user_id, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserID(auth_token, user_id, organization_id, token, "developer");
     }
 
     /**
-     * Method for adding user to your project (assign him role Viewer)
+     * Method for adding user to your project (assign him role Viewer) by user id
      * @param user_id an id of the user to which you want to assign the role (add to project)
      * @param organization_id an id of your organization
      * @param token token of your project in EasyQA. You can generate it on Integrations page
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneViewer(Integer user_id, String organization_id, String token) throws IOException, JSONException {
-        new ProjectRole(url).assign(auth_token, user_id, organization_id, token, "viewer");
+    public JSONObject assigneViewerByUserID(Integer user_id, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserID(auth_token, user_id, organization_id, token, "viewer");
     }
 
     /**
-     * Method for adding user to your project (assign him role Project Manager)
+     * Method for adding user to your project (assign him role Project Manager) by user id
      * @param user_id an id of the user to which you want to assign the role (add to project)
      * @param organization_id an id of your organization
      * @param token token of your project in EasyQA. You can generate it on Integrations page
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
-    public void assigneProjectManager(Integer user_id, String organization_id, String token) throws IOException, JSONException {
-        new ProjectRole(url).assign(auth_token, user_id, organization_id, token, "project_manager");
+    public JSONObject assigneProjectManagerByUserID(Integer user_id, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserID(auth_token, user_id, organization_id, token, "project_manager");
+    }
+
+
+    /**
+     * Method for adding user to your project (assign him role Tester) by user email
+     * @param email an email of the user to which you want to assign the role (add to project)
+     * @param organization_id an id of your organization
+     * @param token token of your project in EasyQA. You can generate it on Integrations page
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneTesterByUserEmail(String email, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserEmail(auth_token, email, organization_id, token, "tester");
+    }
+
+    /**
+     * Method for adding user to your project (assign him role Developer) by user email
+     * @param email an email of the user to which you want to assign the role (add to project)
+     * @param organization_id an id of your organization
+     * @param token token of your project in EasyQA. You can generate it on Integrations page
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneDeveloperByUserEmail(String email, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserEmail(auth_token, email, organization_id, token, "developer");
+    }
+
+    /**
+     * Method for adding user to your project (assign him role Viewer) by user email
+     * @param email an email of the user to which you want to assign the role (add to project)
+     * @param organization_id an id of your organization
+     * @param token token of your project in EasyQA. You can generate it on Integrations page
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneViewerByUserEmail(String email, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserEmail(auth_token, email, organization_id, token, "viewer");
+    }
+
+    /**
+     * Method for adding user to your project (assign him role Project Manager) by user email
+     * @param email an email of the user to which you want to assign the role (add to project)
+     * @param organization_id an id of your organization
+     * @param token token of your project in EasyQA. You can generate it on Integrations page
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+    public JSONObject assigneProjectManagerByEmail(String email, String organization_id, String token) throws IOException, JSONException {
+        return new ProjectRole(url).assignByUserEmail(auth_token, email, organization_id, token, "project_manager");
     }
 
 
@@ -1307,7 +1434,7 @@ public class EasyQA {
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
      */
-    public void deleteByUniqueID(String token, String id) throws IOException, JSONException {
+    public void deleteIssueByUniqueID(String token, String id) throws IOException, JSONException {
 
         new DeleteIssue(url).deleteByUniqueID(token, auth_token, id);
     }
@@ -1319,7 +1446,7 @@ public class EasyQA {
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
      */
-    public void deleteByProjectID(String token, String id) throws IOException, JSONException {
+    public void deleteIssueByProjectID(String token, String id) throws IOException, JSONException {
 
         new DeleteIssue(url).deleteByProjectID(token, auth_token, id);
     }
@@ -1425,7 +1552,7 @@ public class EasyQA {
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
      */
-    public void delete(String token, String id) throws IOException, JSONException {
+    public void deleteTestObject(String token, String id) throws IOException, JSONException {
         new DeleteTestObject(url).delete(auth_token, token, id);
 
     }

@@ -19,16 +19,17 @@ public class OrganizationRole extends Initialization {
     }
 
     /**
-     * Method for adding user to your organization (assign him role)
+     * Method for adding user to your organization (assign him role) by user id
      * @param auth_token your authorization token in EasyQA
      * @param user_id an id of the user to which you want to assign the role (add to organization)
      * @param organization_id the id of your organization
      * @param role can be "user" or "admin"
      * @throws IOException for incorrect parsing of the server response
      * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
      */
 
-    public void assign(String auth_token, Integer user_id, String organization_id, String role) throws IOException, JSONException {
+    public JSONObject assignByUserID(String auth_token, Integer user_id, String organization_id, String role) throws IOException, JSONException {
 
 
         JsonObject parent=new JsonObject();
@@ -46,15 +47,57 @@ public class OrganizationRole extends Initialization {
 
             if (result.startsWith("{")) {
                 JSONObject jsonObj = new JSONObject(result);
-                Integer id_value = jsonObj.getInt("user_id");
-                String role1 = jsonObj.getString("role");
-                System.out.println("Role is assigned! user ID =" + id_value + "role = " + role1);
+                return jsonObj;
 
             }else {
                 System.out.println(result);
+                return null;
             }
         }else {
             System.out.println("Something went wrong!");
+            return null;
+        }
+
+    }
+
+    /**
+     * Method for adding user to your organization (assign him role) by user email
+     * @param auth_token your authorization token in EasyQA
+     * @param email an email of the user to which you want to assign the role (add to organization)
+     * @param organization_id the id of your organization
+     * @param role can be "user" or "admin"
+     * @throws IOException for incorrect parsing of the server response
+     * @throws JSONException if the server returns not Json object
+     * @return JSONObject result of the server response
+     */
+
+    public JSONObject assignByUserEmail(String auth_token, String email, String organization_id, String role) throws IOException, JSONException {
+
+
+        JsonObject parent=new JsonObject();
+        parent.addProperty("auth_token", auth_token);
+        parent.addProperty("email", email);
+        parent.addProperty("role", role);
+
+
+        Call<ResponseBody> call= easyqaUserAPI.assigneOrganizationRole(organization_id, parent);
+
+        Response<ResponseBody> bodyResponse = call.execute();
+        String result = bodyResponse.body().string();
+        if (result!=null){
+
+
+            if (result.startsWith("{")) {
+                JSONObject jsonObj = new JSONObject(result);
+                return jsonObj;
+
+            }else {
+                System.out.println(result);
+                return null;
+            }
+        }else {
+            System.out.println("Something went wrong!");
+            return null;
         }
 
     }

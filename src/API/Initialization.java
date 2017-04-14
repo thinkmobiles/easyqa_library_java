@@ -14,8 +14,10 @@ public class Initialization {
      */
 
 
-    public static final String GET_MEMBERS_LIST = "api/v1/projects/members_list";
-    public static final String POST_SIGN_IN = "api/v1/sign_in";
+    public static final String GET_MEMBERS_LIST = "/api/v1/projects/members_list";
+    public static final String GET_ORG_MEMBERS_LIST = "/api/v1/organization/members";
+    public static final String GET_USER = "/api/v1/users/show";
+    public static final String POST_SIGN_IN = "/api/v1/sign_in";
     public static final String DELETE_SIGN_OUT = "/api/v1/sign_out";
 
     public static final String UPLOAD_CRASH = "/projects/upload_crashes";

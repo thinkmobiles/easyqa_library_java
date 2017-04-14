@@ -64,14 +64,8 @@ public class DeleteIssue extends Initialization{
         Call<ResponseBody> call= easyqaUserAPI.deleteIssueByIDInProject(id, cred);
 
         Response<ResponseBody> bodyResponse = call.execute();
-        String response = bodyResponse.body().string();
+        bodyResponse.body().string();
 
-        if (response.startsWith("{")) {
-            System.out.println("Delete Issue "+id+"=" + response);
-
-        }else {
-            System.out.println(response);
-        }
 
     }
 }

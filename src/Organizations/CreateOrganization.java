@@ -52,7 +52,6 @@ public class CreateOrganization extends Initialization{
         if (result.startsWith("{")) {
             JSONObject jsonObj = new JSONObject(result);
             id_value = jsonObj.getInt("id");
-            System.out.println("Organization is created! id=" + id_value);
 
         }else {
             System.out.println(result);

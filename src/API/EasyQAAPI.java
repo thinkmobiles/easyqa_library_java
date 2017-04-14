@@ -18,6 +18,22 @@ public interface EasyQAAPI {
     Call<ResponseBody> getMembersList(@Query("token") String token);
 
     @Headers("Content-Type: application/json")
+    @GET(Initialization.GET_USER)
+    Call<ResponseBody> getUserByEmail(@Query("email") String email);
+
+    @Headers("Content-Type: application/json")
+    @GET(Initialization.GET_USER)
+    Call<ResponseBody> getUserByID(@Query("id") String id);
+
+    @Headers("Content-Type: application/json")
+    @GET(Initialization.GET_ORG_MEMBERS_LIST)
+    Call<ResponseBody> getOrgMembersListByOrgID(@Query("organization_id") String organization_id, @Query("auth_token") String auth_token);
+
+    @Headers("Content-Type: application/json")
+    @GET(Initialization.GET_ORG_MEMBERS_LIST)
+    Call<ResponseBody> getOrgMembersListByOrgTitle(@Query("organization_title") String organization_title, @Query("auth_token") String auth_token);
+
+    @Headers("Content-Type: application/json")
     @POST(Initialization.POST_SIGN_IN)
     Call<ResponseBody> signIn(@Body JsonObject jsonObject);
 

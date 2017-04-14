@@ -148,20 +148,8 @@ public class UpdateIssue extends Initialization {
         Call<ResponseBody> call= easyqaUserAPI.updateIssueByIdInProject(id, model);
 
         Response<ResponseBody> bodyResponse = call.execute();
-        String result = bodyResponse.body().string();
-        if (result!=null){
-            System.out.println(result);
+        bodyResponse.body().string();
 
-            if (result.startsWith("{")) {
-                JSONObject jsonObj = new JSONObject(result);
-                Integer id_value = jsonObj.getInt("id");
-                System.out.println("Issue is updated! id=" + id_value);
 
-            }else {
-                System.out.println(result);
-            }
-        }else {
-            System.out.println("Something went wrong");
-        }
     }
 }
