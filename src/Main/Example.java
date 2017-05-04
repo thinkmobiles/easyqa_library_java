@@ -14,13 +14,11 @@ import java.util.Map;
  */
 public class Example {
 
-//    public static String url = "https://app.geteasyqa.com";
-    public static String url = "http://qa_dashboard.test.thinkmobiles.com:8085/";
-//    public static String token = "PHbjPki+2P7Pn/6fNgNLiN3CpIu2c7bt";
-    public static String token = "NcS6OjfvocJwEJmYnjcCnhpIadKyx9tv";
-//    public static String email = "test@gmail.com";
-    public static String email = "yana.gusti@thinkmobiles.com";
+    public static String url = "https://app.geteasyqa.com";
+    public static String token = "PHbjPki+2P7Pn/6fNgNLiN3CpIu2c7bt";
+    public static String email = "test@gmail.com";
     public static String password = "111111";
+
 
     public static void main (String args []) throws IOException, JSONException {
         ArrayList<File> files = new ArrayList<>();
